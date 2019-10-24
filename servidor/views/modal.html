@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+
+   <head>
+    <meta charset="utf-8">
+    <title>Its My Life</title>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js"></script>
+    <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  </head>
+  <style>
+      a.btn { margin-right: 200px;
+      }
+      /* label color */
+
+  </style>
+  <style type='text/css'>
+    @-webkit-keyframes rotate {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+#loading {
+    border: 1px solid #000;
+    border-right: 0;
+    border-bottom: 0;
+    -webkit-border-radius: 100px;
+    height: 100px;
+    width: 100px;
+    margin: 100px;
+    -webkit-transition: all 0.5s ease-in;
+    -webkit-animation-name:             rotate;
+    -webkit-animation-duration:         1.0s;
+    -webkit-animation-iteration-count:  infinite;
+    -webkit-animation-timing-function: linear;
+}
+</style>
+  <body>
+
+  <nav>
+    <div class="nav-wrapper blue darken-2">
+      <ul id="nav-mobile" class="left hide-on-med-and-down">
+        <li><a href="/">Home</a></li>
+        <li><a>About</a></li>
+        <li><a>Help</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+  <div class="container">
+      <!-- Download File -->
+      <div class="card">
+              <div class="card-content black-text">
+                <div class="container">
+                  <div class="row">
+                    <div class="col s8">
+                      <span class="card-title"><b>Firebase Files</b></span>
+                    </div>
+                    <div class="col s4">
+                      <form action="/downloaddatabase" method="post">
+                        <input name="filename" id="filename" type = "hidden" value={{filename}}>
+                        <a style="margin:10px;" class="btn blue waves-effect" href="javascript:{}" onclick="email_submit(this);"  name="action">Download Database</a>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+      <!-- Simple Graphic -->
+      <div class="card">
+                <div class="card-content black-text">
+
+                  <div class="container">
+
+                    <div class="row">
+                      <div class="col s12">
+                        <span class="card-title"><b>Simple Graphics</b></span>
+                        <p>Click on buttons available to building a graphic. </p>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="center col s6 m3">
+                        <form action="/batterygraphic" method="post">
+                          <input name="filename" id="filename" type = "hidden" value={{filename}}>
+                          <a  class="btn waves-effect blue"  href="javascript:{}" onclick="email_submit(this);" name="action">Battery Graphic</a>
+                        </form>
+                      </div>
+
+                      <div class="center col s6 m3">
+                        <form action="/sensorhubgraphic" method="post">
+                          <input name="filename" id="filename" type = "hidden" value={{filename}}>
+                          <a class="btn waves-effect blue"  href="javascript:{}" onclick="email_submit(this);" name="action">SensorHub Graphic</a>
+                        </form>
+                      </div>
+
+                      <div class="center col s6 m3">
+                        <form action="/blegraphic" method="post">
+                          <input name="filename" id="filename" type = "hidden" value={{filename}}>
+                          <a class="btn waves-effect blue"  href="javascript:{}" onclick="email_submit(this);" name="action">Bluetooth Graphic</a>
+                        </form>
+                      </div>
+
+                      <div class="center col s6 m3">
+                        <form action="/wifigraphic" method="post">
+                          <input name="filename" id="filename" type = "hidden" value={{filename}}>
+                          <a class=" btn waves-effect blue"  href="javascript:{}" onclick="email_submit(this);" name="action">Wifi Graphic</a>
+                        </form>
+                      </div>
+
+
+                    </div>
+                  </div>
+
+               </div>
+              </div>
+      <!-- Specific Graphic -->
+      <div class="card">
+        <div class="card-content black-text">
+
+          <div class="container">
+            <div class="row">
+              <div class="col s8">
+                <span class="card-title"><b>Specific Graphics</b></span>
+              </div>
+              <div class="col s4">
+                  <a style="margin:10px;" class="btn blue waves-effect" href="/specificgraphic?filename={{filename}}" name="action">Access</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <!-- Machine Learning -->
+      <div class="card">
+                <div class="card-content black-text">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col s8">
+                        <span class="card-title"><b>Machine Learning</b></span>
+                        <p>Click on buttons available to building the result.</p>
+                      </div>
+                      <div class="col s4">
+                          <a style="margin:10px;" class="btn blue waves-effect" href="/advancedoptions?filename={{filename}}">Advanced Mode</a>
+                      </div>
+                    </div>
+
+                    <form id="form" action="/computeEngine" method="post">
+                      <input name="filename" id="filename" type = "hidden" value={{filename}}>
+                      <ul class="collapsible">
+                        <!-- Pre-Processing -->
+                        <li>
+                          <div class="collapsible-header">
+                            <i class="material-icons">assignment_turned_in</i>
+                            Pre-Processing config
+                          </div>
+                          <div class="collapsible-body">
+                            <div class="container">
+                              <!-- Form  -->
+                              <div class="row" style="margin-top:10px;">
+                                <div class="col s6">
+                                  Bluetooth
+                                </div>
+                                <div class="col s6">
+                                  <div class="switch">
+                                    <label>
+                                      Off
+                                      <input id="bluetooth" checked name="bluetooth"  type="checkbox">
+                                      <span class="lever"></span>
+                                      On
+                                    </label>
+                                  </div>
+                                </div>
+
+                              </div>
+                              <div class="row" style="margin-top:10px;">
+                                <div class="col s6">
+                                  Wi-Fi
+                                </div>
+                                <div class="col s6">
+                                  <div class="switch">
+                                    <label>
+                                      Off
+                                      <input id="wifi" name="wifi"  type="checkbox">
+                                      <span class="lever"></span>
+                                      On
+                                    </label>
+                                  </div>
+                                </div>
+
+                              </div>
+
+                              <div class="row" style="margin-top:10px;">
+                                <div class="col s6">
+                                  Optmization Sensor Hub
+                                </div>
+                                <div class="col s6">
+                                  <div class="switch">
+                                    <label>
+                                      Off
+                                      <input id="optimzation_sensor_hub" name="optimzation_sensor_hub"  type="checkbox">
+                                      <span class="lever"></span>
+                                      On
+                                    </label>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="row" >
+
+                              </div>
+
+                            </div>
+                          </div>
+
+                        </li>
+                        <!-- Clustering -->
+                        <li>
+                          <div class="collapsible-header">
+                            <i class="material-icons">assistant</i>
+                            Clustering config
+                          </div>
+                          <div class="collapsible-body">
+                            <div class="container">
+                              <!-- Form  -->
+                              <div class="row" style="margin-top:10px;">
+                                <div class="input-field col s12">
+                                 <input id="number" name="number" required type="number" class="validate">
+                                 <label for="last_name">Number of Cluster</label>
+                                </div>
+                              </div>
+
+
+
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                      <a class=" btn waves-effect blue" href="javascript:{}" onclick="email_submit(this);" name="action">Run</a>
+                    </form>
+                  </div>
+
+                </div>
+              </div>
+
+  </div>
+
+<a style="visibility: hidden;" class="waves-effect waves-light btn modal-trigger" id="btn_submit" href="#modal1">Modal</a>
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal">
+  <div class="modal-content">
+    <h4 align="center">Loading ...</h4>
+    <div align="center">
+       <div>
+         <div id="loading"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Modal Trigger -->
+
+
+  <!-- Modal Structure -->
+  <div id="modal_email" class="modal">
+    <div class="modal-content">
+      <h4>
+        Insert your Email
+      </h4>
+      <div class="input-field col s6">
+          <i class="material-icons prefix">account_circle</i>
+          <input id="email_input" required type="email" class="validate">
+          <label for="icon_prefix">Email</label>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <a href="#" class="modal-close waves-effect waves-green btn-flat">Ok</a>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+  $('#form').on('submit', function(event) {
+    event.preventDefault();
+    $("#btn_submit").click();
+    this.submit(); //now submit the form
+  });
+  </script>
+
+  <script type="text/javascript">
+
+    $(document).ready(function() {
+      $('select').material_select();
+      $('.modal').modal();
+      Materialize.updateTextFields();
+
+      // $("form").on("submit", function(){
+      //    console.log($(this));
+      //    $(this).submit();
+      //    return false;
+      // });
+
+    //
+    //   var autocomplete_ble = JSON.parse("{{mlistble}}".replace(new RegExp("&#39;", 'g'), "\"").replace(new RegExp("None", 'g'), "null"));
+    //   autocomplete_wifi = JSON.parse("{{mlistwifi}}".replace(new RegExp("&#39;|&#34;", 'g'), "\"").replace(new RegExp("None", 'g'), "null"));
+    //
+    //   $('#ble_list.chips-autocomplete').material_chip({
+    //       autocompleteOptions: {
+    //           data: autocomplete_ble,
+    //           limit: Infinity,
+    //           minLength: 1
+    //       },
+    //       secondaryPlaceholder: '+ MacAddress',
+    //       placeholder: 'Add MacAddress',
+    //   });
+    //
+    //   $('#wifi_list.chips-autocomplete').material_chip({
+    //       autocompleteOptions: {
+    //           data: autocomplete_wifi,
+    //           limit: Infinity,
+    //           minLength: 1
+    //       },
+    //       secondaryPlaceholder: '+ MacAddress',
+    //       placeholder: 'Add MacAddress',
+    //   });
+    // });
+
+
+
+    });
+
+    function submit_ble(){
+      for (var i = 0; i < $('div#ble_list').material_chip('data').length; i++) {
+        $("#bluetoothspecificgraphic").append('<input hidden id="ble_list" value="'+$('div#ble_list').material_chip('data')[i].tag+'" name="ble_list">')
+      }
+      document.getElementById('bluetoothspecificgraphic').submit();
+      $("input#ble_list").remove();
+    }
+    function submit_wifi(){
+      for (var i = 0; i < $('div#wifi_list').material_chip('data').length; i++) {
+        $("#wifispecificgraphic").append('<input hidden id="wifi_list" value="'+$('div#wifi_list').material_chip('data')[i].tag+'" name="wifi_list">')
+      }
+      document.getElementById('wifispecificgraphic').submit();
+      $("input#wifi_list").remove();
+    }
+
+      function email_submit(element){
+        console.log("entro");
+        $("#modal_email").modal({
+            dismissible: false, // Modal can be dismissed by clicking outside of the modal
+            opacity: .5, // Opacity of modal background
+            inDuration: 300, // Transition in duration
+            outDuration: 200, // Transition out duration
+            startingTop: '4%', // Starting top style attribute
+            endingTop: '10%', // Ending top style attribute
+            complete: function() {
+              var person_email = $("#email_input").val();
+              $(element).closest("form").append('<input hidden id="email" value="'+person_email+'" name="email">')
+              $(element).closest("form").submit();
+              $(element).closest("form").child("#email").remove();
+             } // Callback for Modal close
+          });
+        $("#modal_email").modal("open");
+      }
+
+  </script>
+</html>

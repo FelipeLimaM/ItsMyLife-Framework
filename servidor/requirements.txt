@@ -1,0 +1,15 @@
+WebOb
+Paste
+webapp2
+Jinja2
+spur
+google-cloud-storage
+google-api-python-client
+uritemplate.py
+google-auth-httplib2
+firebase-admin
+pycryptodome
+gcloud
+pandas>=0.20.2
+kmodes>=0.7
+pathlib2

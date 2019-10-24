@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+   <head>
+    <meta charset="utf-8">
+    <title>Its My Life</title>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+
+    <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  </head>
+  <body>
+    <nav>
+      <div class="nav-wrapper blue darken-2">
+        <ul id="nav-mobile" class="left hide-on-med-and-down">
+          <li><a href="/">Home</a></li>
+          <li><a>About</a></li>
+          <li><a>Help</a></li>
+        </ul>
+      </div>
+    </nav>
+
+
+    <div class="container">
+
+      <div class="row">
+        <div class="col s12 m6">
+          <div class="card">
+            <div class="card-content black-text center">
+                  <a class="btn waves-effect blue"  href="{{url}}" name="action">Download File</a>
+            </div>
+          </div>
+        </div>
+        <div class="col s12 m6">
+          <div class="card">
+            <div class="card-content black-text center">
+              {% if level_html <=  2 %}
+                  <form id="form" action="/continueML" method="post">
+                    <input id="filename" name="filename" hidden type="text" value="{{filename}}">
+                    <input id="config" name="config" hidden type="text" value="{{config}}">
+                    <input id="level_html" name="level_html" hidden type="text" value="{{level_html}}">
+                    <input id="params" name="params" hidden type="text" value="{{params}}">
+                    <div class="row" style="margin-top:10px;">
+                      <div class="input-field col s12">
+                        <input id="number" name="number" required type="number" class="validate">
+                        <label for="last_name">Number of Cluster</label>
+                      </div>
+                    </div>
+                    <a class="btn waves-effect blue"  href="javascript:{}" onclick="email_submit(this);" name="action">Continue Process</a>
+                  </form>
+              {% elif level_html == 3 %}
+                  <form id="form" action="/continueML" method="post">
+
+                    <a class="btn waves-effect blue"  href="{{url}}" name="action">Build Graphic</a>
+                  </form>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+
+    </div>
+
+    <!-- Modal Structure -->
+    <div id="modal_email" class="modal">
+      <div class="modal-content">
+        <h4>
+          Insert your Email
+        </h4>
+        <div class="input-field col s6">
+            <i class="material-icons prefix">account_circle</i>
+            <input id="email_input" required type="email" class="validate">
+            <label for="icon_prefix">Email</label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="#" class="modal-close waves-effect waves-green btn-flat">Ok</a>
+      </div>
+    </div>
+
+
+  </body>
+  <script type="text/javascript">
+  $(document).ready(function() {
+    $('select').material_select();
+    $('.modal').modal();
+    Materialize.updateTextFields();
+
+
+  });
+
+  function email_submit(element){
+    console.log("entro");
+    $("#modal_email").modal({
+        dismissible: false, // Modal can be dismissed by clicking outside of the modal
+        opacity: .5, // Opacity of modal background
+        inDuration: 300, // Transition in duration
+        outDuration: 200, // Transition out duration
+        startingTop: '4%', // Starting top style attribute
+        endingTop: '10%', // Ending top style attribute
+        complete: function() {
+          var person_email = $("#email_input").val();
+          $(element).closest("form").append('<input hidden id="email" value="'+person_email+'" name="email">')
+          $(element).closest("form").submit();
+          $(element).closest("form").child("#email").remove();
+         } // Callback for Modal close
+      });
+    $("#modal_email").modal("open");
+  }
+
+  </script>
+</html>
