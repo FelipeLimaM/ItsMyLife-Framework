@@ -6,11 +6,9 @@ O intuito desse servidor é facilitar a manipulação dos dados que podem ser vi
 
 ## Pre-requisisto:
 
- - Criar um projeto dentro do Firebase. (link)
+ - Criar um projeto dentro do Firebase. [link](https://github.com/FelipeLimaM/ItsMyLife-Framework/blob/master/Firebase_setup.pdf)
 
- - Gerar a chave de acesso (Projeto Firebase) para o servidor. (link)
-
- - Gerar o arquivo de acesso (Projeto Firebase) para aplicação do Smartphone. (link)
+ - Gerar o arquivo de acesso (Projeto Firebase) para aplicação do Smartphone.
 
  - Configurar um Email para que o servidor possa disparar o emails com o resultado ou informando algum erro durante o processamento das informações.
 
